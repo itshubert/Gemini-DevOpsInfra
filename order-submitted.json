@@ -1,0 +1,26 @@
+{
+  "_comment": "EventBridge rules for OrderSubmitted event.",
+  "eventBusName": "gemini",
+  "rules": [
+    {
+      "name": "OrderSubmittedRule",
+      "eventPattern": {
+        "source": [
+          "gemini"
+        ],
+        "detail-type": [
+          "OrderSubmitted"
+        ]
+      },
+      "targets": [
+        {
+          "Id": "sqs-order-submitted",
+          "queueName": "order-submitted.fifo",
+          "SqsParameters": {
+            "MessageGroupId": "order-submitted"
+          }
+        }
+      ]
+    }
+  ]
+}

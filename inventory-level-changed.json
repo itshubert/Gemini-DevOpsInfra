@@ -1,0 +1,26 @@
+{
+  "_comment": "EventBridge rules for event-driven architecture.",
+  "eventBusName": "gemini",
+  "rules": [
+    {
+      "name": "InventoryLevelChangedRule",
+      "eventPattern": {
+        "source": [
+          "gemini"
+        ],
+        "detail-type": [
+          "InventoryLevelChanged"
+        ]
+      },
+      "targets": [
+        {
+          "Id": "sqs-inventory-level-changed",
+          "Arn": "arn:aws:sqs:us-east-1:000000000000:inventory-level-changed.fifo",
+          "SqsParameters": {
+            "MessageGroupId": "inventory-level-changes"
+          }
+        }
+      ]
+    }
+  ]
+}
