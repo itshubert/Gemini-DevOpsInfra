@@ -15,10 +15,11 @@
       "targets": [
         {
           "Id": "sqs-inventory-level-changed",
-          "Arn": "arn:aws:sqs:us-east-1:000000000000:inventory-level-changed.fifo",
+          "queueName": "inventory-level-changed.fifo",
           "SqsParameters": {
             "MessageGroupId": "inventory-level-changes"
-          }
+          },
+          "InputPath": "$.detail"
         }
       ]
     }
