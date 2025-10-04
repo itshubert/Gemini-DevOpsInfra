@@ -18,7 +18,8 @@
           "queueName": "order-submitted.fifo",
           "SqsParameters": {
             "MessageGroupId": "order-submitted"
-          }
+          },
+          "InputPath": "$.detail"
         }
       ]
     }

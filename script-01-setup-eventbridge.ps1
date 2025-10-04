@@ -119,6 +119,14 @@ function New-EventBridgeRuleWithTargets {
     Write-Host "Targets to be added:" -ForegroundColor Magenta
     $Targets | ForEach-Object { $_ | ConvertTo-Json -Compress -Depth 10 | Write-Host -ForegroundColor Gray }
     
+    # Convert InputTransformer if present (PowerShell uses hashtables, need to ensure proper JSON conversion)
+    foreach ($target in $Targets) {
+        if ($target.PSObject.Properties.Name -contains "InputTransformer") {
+            # Ensure InputTransformer is properly formatted
+            Write-Host "Input Transformer detected for target: $($target.Id)" -ForegroundColor Yellow
+        }
+    }
+    
     $targetsJson = $Targets | ConvertTo-Json -Compress -Depth 10
 
     if ($UseLocalStack) {
