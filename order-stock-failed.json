@@ -1,0 +1,27 @@
+{
+  "_comment": "EventBridge rules for OrderStackFailed event.",
+  "eventBusName": "gemini",
+  "rules": [
+    {
+      "name": "OrderStackFailedRule",
+      "eventPattern": {
+        "source": [
+          "gemini"
+        ],
+        "detail-type": [
+          "OrderStackFailed"
+        ]
+      },
+      "targets": [
+        {
+          "Id": "sqs-order-stack-failed",
+          "queueName": "order-stack-failed.fifo",
+          "SqsParameters": {
+            "MessageGroupId": "order-stack-failed"
+          },
+          "InputPath": "$.detail"
+        }
+      ]
+    }
+  ]
+}

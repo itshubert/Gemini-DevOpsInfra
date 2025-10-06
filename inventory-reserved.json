@@ -1,0 +1,27 @@
+{
+  "_comment": "EventBridge rules for InventoryReserved event.",
+  "eventBusName": "gemini",
+  "rules": [
+    {
+      "name": "InventoryReservedRule",
+      "eventPattern": {
+        "source": [
+          "gemini"
+        ],
+        "detail-type": [
+          "InventoryReserved"
+        ]
+      },
+      "targets": [
+        {
+          "Id": "sqs-inventory-reserved",
+          "queueName": "inventory-reserved.fifo",
+          "SqsParameters": {
+            "MessageGroupId": "inventory-reserved"
+          },
+          "InputPath": "$.detail"
+        }
+      ]
+    }
+  ]
+}
